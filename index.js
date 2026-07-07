@@ -10,7 +10,15 @@ configDotenv();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with your frontend's origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  })
+);
+
+
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 
 app.use(express.json());
